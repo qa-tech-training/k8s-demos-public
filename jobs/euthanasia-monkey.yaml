@@ -52,6 +52,7 @@ spec:
       name: euthanasia-monkey
     spec:
       template:
+        spec:
           volumes:
           - name: em-script
             configMap:
@@ -63,7 +64,7 @@ spec:
             args:
             - -c
             - /em-script/em-script.sh
-            image: bitnami/kubectl:1.32
+            image: bitnami/kubectl:1.33
             name: locust
             volumeMounts:
               - mountPath: /em-script
