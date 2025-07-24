@@ -24,8 +24,10 @@ spec:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
-            - matchLabels:
-                gpu: "true"
-
+            - matchExpressions:
+              - key: gpu
+                operator: In
+                values:
+                - "true"
 
               
