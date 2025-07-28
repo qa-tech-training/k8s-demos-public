@@ -34,6 +34,8 @@ kubectl config set-context alice@kubernetes \
 	--namespace=dev \
 	--user=alice
 
+kubectl config use-context alice@kubernetes
+
 kubectl config delete-context kubernetes-admin@kubernetes
 kubectl config delete-user kubernetes-admin 
 
