@@ -47,7 +47,7 @@ spec:
               - "/bin/bash"
             args:
               - "-c"
-              - "kubectl delete job $(kubectl get job -o=jsonpath='{.items[?(@.status.succeeded==1)].metadata.name}')"
-              # should be status.succeeded==status.completions or something...
+              - "kubectl delete job $(kubectl get job -o=jsonpath='{.items[?(@.status.succeeded==.spec.completions)].metadata.name}')"
           restartPolicy: OnFailure
   schedule: '* * * * *' # once per minute (for demo purposes)
+
