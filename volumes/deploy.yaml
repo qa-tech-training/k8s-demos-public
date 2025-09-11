@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web-one
+  name: web-one
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-one
+      tier: web
+  template:
+    metadata:
+      labels:
+        app: web-one
+        tier: web
+    spec:
+      containers:
+      - image: busybox
+        name: logger
+        volumeMounts:
+        - name: server-logs
+          mountPath: /var/log/nginx
+        command:
+        - sh
+        - -c
+        - "tail -f /var/log/nginx/access.log"
+        resources:
+          requests:
+            cpu: 10m
+            memory: 10Mi
+          limits:
+            cpu: 10m
+            memory: 10Mi
+      - image: nginx:1.23-alpine
+        name: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: server-logs
+          mountPath: /var/log/nginx
+        resources:
+          requests:
+            cpu: 10m
+            memory: 20Mi
+          limits:
+            cpu: 10m
+            memory: 20Mi
+      volumes:
+      - name: server-logs
+        emptyDir: {}
