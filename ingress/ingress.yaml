@@ -2,8 +2,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-test
-  # annotations:
-  #   kubernetes.io/ingress.class: "nginx"
+  annotations:
+    nginx.ingress.kubernetes.io/service-upstream: "true"
   namespace: default
 spec:
   ingressClassName: nginx
