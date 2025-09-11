@@ -1,14 +1,15 @@
-kind: PersistentVolume
 apiVersion: v1
+kind: PersistentVolume
 metadata:
-  name: 2gpv
-  labels:
-    type: local
+  name: example-pv
 spec:
   capacity:
-    storage: 2Gi
+    storage: 1Gi
+  volumeMode: Filesystem
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
   hostPath:
     type: DirectoryOrCreate
     path: /var/volumes/data01

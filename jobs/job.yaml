@@ -3,6 +3,8 @@ kind: Job
 metadata:
   name: somejob
 spec:
+  completions: 6
+  parallelism: 2
   template:
     spec:
       containers:
@@ -11,5 +13,5 @@ spec:
         args:
           - /bin/sh
           - -c
-          - 'echo hello world; sleep 30; echo byee!'
+          - 'echo "-- STARTING --"; sleep 30; echo "-- COMPLETE --"'
       restartPolicy: Never

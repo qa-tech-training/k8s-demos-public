@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: local-pv
+  name: example-pv
 spec:
   capacity:
-    storage: 100Gi
+    storage: 1Gi
   volumeMode: Filesystem
   accessModes:
   - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Delete
-  storageClassName: local-storage
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
   local:
     path: /mnt/disks/ssd1
   nodeAffinity:
