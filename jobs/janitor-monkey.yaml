@@ -41,7 +41,7 @@ spec:
         spec:
           serviceAccountName: janitor-sa
           containers:
-          - image: bitnami/kubectl:1.33
+            - image: alpine/kubectl
             name: janitor-monkey
             command:
               - "/bin/bash"
