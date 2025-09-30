@@ -13,7 +13,7 @@ spec:
           nodeName: cp
           containers:
           - name: etcd-backup
-            image: bitnamilegacy/etcd:3.5.0
+            image: agray998/etcd:3.5
             env:
             - name: ALLOW_NONE_AUTHENTICATION
               value: "yes"
