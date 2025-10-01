@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: myapp
+  name: myapp
+spec:
+  serviceName: myapp-headless
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - image: busybox
+        name: myapp
+        resources: {}
+        volumeMounts:
+        - name: statefiles
+          mountPath: /var/app
+        command:
+        - /bin/sh
+        - -c
+        - "while true; do cat /var/app/$(hostname).state; done"
+      volumes:
+      - name: statefiles
+        PersistentVolumeClaim:
+          claimName: myapp-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: myapp-headless
+  name: myapp-headless
+spec:
+  clusterIP: None
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: myapp
+
