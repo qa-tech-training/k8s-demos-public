@@ -35,7 +35,7 @@ If you attempt to create a pod from the manifest above, the first issue you will
 ```
 Error from server (BadRequest): error when creating "brokenPod.yaml": Pod in version "v1" cannot be handled as a Pod: json: cannot unmarshal object into Go struct field Container.spec.containers.ports of type []v1.ContainerPort
 ```
-To understand the issue here, note the field reference telling us where the issue is - spec.containers.ports. This is referencing the ports block at the end of the manifest. Also note the target type that we are trying to unmarshall into - []v1.ContainerPort - is an array (as indicated by the []). The solution is that _ports_ should be a list, so we need to make the containerPort a list item, which in YAML can be done by preceding it with a '-', like so:
+To understand the issue here, note the field reference telling us where the issue is - _spec.containers.ports_. This is referencing the ports block at the end of the manifest. Also note the target type that we are trying to unmarshall into - []v1.ContainerPort - is an array (as indicated by the []). The solution is that _ports_ should be a list, so we need to make the containerPort a list item, which in YAML can be done by preceding it with a '-', like so:
 ```yaml
 ...
     ports:
@@ -48,7 +48,7 @@ If you attempt to create the pod again, after fixing the container port, you wil
 Error from server (BadRequest): error when creating "brokenPod.yaml": Pod in version "v1" cannot be handled as a Pod: strict decoding error: unknown field "spec.containers[0].limits", unknown field "spec.containers[0].requests", unknown field "spec.volumes[0].terminationGracePeriodSeconds"
 ```
 This is a sure-fire indicator of incorrect indentation. Looking at the refs for the unknown fields we again get a sense of where the problems are:
-  _spec.containers[0].limits_ and _spec.containers[0].requests_ - the resources section of the spec
+###  _spec.containers[0].limits_ and _spec.containers[0].requests_ - the resources section of the spec
 ```yaml
 ...
     resources:
@@ -70,7 +70,7 @@ These need to be indented further, so that the requests and limits mappings belo
         cpu: 10m
         memory: 10Mi
 ```
-  _spec.volumes[0].terminationGracePeriodSeconds_ - the volumes section of the spec
+###  _spec.volumes[0].terminationGracePeriodSeconds_ - the volumes section of the spec
 ```yaml
 ...
 spec:
