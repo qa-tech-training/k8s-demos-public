@@ -1,3 +1,4 @@
 *.pem
 ./istio/istio-*/*
 .vscode/*      # Maybe .vscode/**/* instead - see comments
+*.tar.gz
