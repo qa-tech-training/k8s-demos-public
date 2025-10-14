@@ -2,7 +2,6 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: etcd-backup
-  namespace: kube-system
 spec:
   schedule: "0 8 * * *"  # Run daily at 08:00 AM
   jobTemplate:
