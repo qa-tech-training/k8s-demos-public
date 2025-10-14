@@ -44,7 +44,7 @@ spec:
           - image: agray998/kubectl
             name: janitor-monkey
             command:
-              - "/bin/bash"
+              - "/bin/sh"
             args:
               - "-c"
               - "kubectl delete job $(kubectl get job -o=jsonpath='{.items[?(@.status.succeeded==.spec.completions)].metadata.name}')"
