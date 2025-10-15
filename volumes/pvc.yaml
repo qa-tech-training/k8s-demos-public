@@ -4,7 +4,7 @@ metadata:
   name: myclaim
 spec:
   storageClassName: ""
-  volumeName: 2gpv
+  volumeName: example-pv
   accessModes:
   - ReadWriteOnce
   resources:
