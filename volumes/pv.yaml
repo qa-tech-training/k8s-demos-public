@@ -8,7 +8,7 @@ spec:
   volumeMode: Filesystem
   accessModes:
   - ReadWriteOnce
-  - ReadWriteMany
+#  - ReadWriteMany - a hostPath cannot be RWX
   persistentVolumeReclaimPolicy: Retain
   hostPath:
     type: DirectoryOrCreate
