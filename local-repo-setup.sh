@@ -24,11 +24,6 @@ EOF
 
 sudo sed -e "s,config_path = '/etc/containerd/certs.d:/etc/docker/certs.d',config_path = '/etc/containerd/certs.d',g" -i /etc/containerd/config.toml
 
-# sudo cat << EOF | sudo tee -a /etc/containerd/config.toml
-# [plugins."io.containerd.cri.v1.images".registry.mirrors."*"]
-# endpoint = ["http://10.97.40.62:5000"]
-# EOF
-
 # restart containerd
 sudo systemctl daemon-reload
 sudo systemctl restart containerd
@@ -38,5 +33,6 @@ echo "export repo=10.97.40.62:5000" >> $HOME/.bashrc
 
 sleep 4
 echo ""
+
 
 echo "Local Repo configured, follow the next steps"
